@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: somemoodle
+      MYSQL_DATABASE: moodle
+      MYSQL_USER: moodle
+      MYSQL_PASSWORD: moodle
+
+  moodle:
+    image: jhardison/moodle:latest
+    depends_on:
+      - db
+    ports:
+      - "9999:80"
+    restart: always
+    environment:
+      DB_ENV_MYSQL_DATABASE: moodle
+      DB_ENV_MYSQL_USER: moodle
+      DB_ENV_MYSQL_PASSWORD: moodle
+      DB_PORT_3306_TCP_ADDR: db:3306
+      MOODLE_URL: http://lms.abc.com
+    volumes:
+      - ./moodledata:/var/moodledata
