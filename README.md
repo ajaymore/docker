@@ -14,6 +14,14 @@ sudo add-apt-repository ppa:certbot/certbot
 sudo apt-get -y update
 sudo apt-get install -y python-certbot-apache
 
+```
+apt install -y apache2 apache2-utils mysql-client mysql-server
+
+sudo mysql_secure_installation
+
+apt install -y php7.0 libapache2-mod-php7.0 graphviz aspell php7.0-pspell php7.0-curl php7.0-gd php7.0-intl php7.0-mysql php7.0-xml php7.0-xmlrpc php7.0-ldap php7.0-zip php7.0-cli php7.0-cgi
+```
+
 sudo a2enmod proxy
 sudo a2enmod proxy_http
 sudo a2enmod proxy_balancer
@@ -21,6 +29,10 @@ sudo a2enmod lbmethod_byrequests
 sudo systemctl restart apache2
 
 [install docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository)
+
+```
+docker network create --driver bridge reverse-proxy
+```
 
 edit /etc/hosts
 127.0.0.1 abc.com

@@ -7,10 +7,10 @@ services:
       - ./db_data:/var/lib/mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: somemoodle
-      MYSQL_DATABASE: moodle
-      MYSQL_USER: moodle
-      MYSQL_PASSWORD: moodle
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
     networks:
         - back
 
@@ -21,27 +21,26 @@ services:
     restart: always
     environment:
       VIRTUAL_PORT: 1235
-      VIRTUAL_HOST: lms2.abc.com
+      VIRTUAL_HOST: wptwo.abc.com
       PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: somemoodle
+      MYSQL_ROOT_PASSWORD: somewordpress
     networks:
       - reverse-proxy
       - back
 
-  moodle:
+  wordpress:
     build: .
     depends_on:
       - db
     restart: always
     environment:
-      VIRTUAL_PORT: 2222
-      VIRTUAL_HOST: lms.abc.com
-      DB_ENV_MYSQL_DATABASE: moodle
-      DB_ENV_MYSQL_USER: moodle
-      DB_ENV_MYSQL_PASSWORD: moodle
-      MOODLE_URL: http://lms.abc.com
+      VIRTUAL_PORT: 1234
+      VIRTUAL_HOST: wpone.abc.com
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
     volumes:
-      - ./moodledata:/var/moodledata
+      - ./wp-content:/var/www/html/wp-content
     networks:
       - reverse-proxy
       - back
