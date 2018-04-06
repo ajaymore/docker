@@ -5,7 +5,7 @@ services:
         image: mysql:latest
         restart: always
         volumes:
-            - db-volume-sub:/var/lib/mysql
+            - db-volume:/var/lib/mysql
         env_file:
             - moodle_variables.env
         networks:
@@ -22,9 +22,9 @@ services:
             - dbapp
         restart: always
         volumes:
-            - moodleapp-data-sub:/var/moodledata
+            - moodleapp-data:/var/moodledata
         ports:
-            - 1235:80
+            - 1234:80
         env_file:
             - moodle_variables.env
         networks:
@@ -36,8 +36,8 @@ services:
                 condition: any            
 
 volumes: 
-    db-volume-sub:
-    moodleapp-data-sub:
+    db-volume:
+    moodleapp-data:
 
 networks:
     backendDB:

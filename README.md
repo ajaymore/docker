@@ -82,3 +82,5 @@ sudo a2ensite python.abc.com
 1. copy sourcecode
 2. copy moodledata
 3. get db dump `mysqldump -u xxxx -p db_name > dump.sql`
+
+sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
